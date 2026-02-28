@@ -3,7 +3,7 @@ import requests
 
 API_URL = "http://127.0.0.1:8000/predict"
 
-st.title("Health Premier Risk Prediction App")
+st.title("Health Premier Risk Prediction App DEMO")
 st.markdown("Enter your details to predict your health risk category.")
 
 # Collect user input
