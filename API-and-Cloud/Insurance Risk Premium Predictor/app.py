@@ -1,23 +1,15 @@
 import numpy as np
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field, computed_field, ValidationError, field_validator
-import json
 import pandas as pd
-import pickle
-from typing import List, Optional, Literal, Annotated
+from typing import List, Literal, Annotated
 from fastapi.responses import JSONResponse
-
+from model.predict import model, model_version, predict_output
+from schema.prediction_category import prediction_response
 
 
 #importing the user_input module from the schema package to use the UserInput class for data validation and processing
 import schema.user_input 
-
-
-#impoting the model
-with open(r"F:\Python\FastAPI01\API-and-Cloud\Insurance Risk Premium Predictor\model.pkl", "rb") as file:
-    model = pickle.load(file)
-
-model_version = "1.0.0"
 
 app = FastAPI()
 
@@ -33,7 +25,7 @@ def health_check():
         "model loaded": model is not None
         }
 
-@app.post("/predict")
+@app.post("/predict", response_model=prediction_response)
 def predict_risk(data: schema.user_input.UserInput):
 
     input_df = pd.DataFrame ([{
@@ -47,8 +39,8 @@ def predict_risk(data: schema.user_input.UserInput):
     }])
 
     try:
-        prediction = model.predict(input_df)[0]
-        return JSONResponse(status_code=200, content={"risk_category": prediction})
+        prediction = predict_output(input_df)
+        return JSONResponse(status_code=200, content={"Prediction": prediction})
     except Exception as e:
         import traceback
         tb = traceback.format_exc()

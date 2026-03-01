@@ -1,11 +1,9 @@
+from logging import config
+
 from pydantic import BaseModel, Field, computed_field, field_validator
 import typing
 
-
-tier1 = ['Delhi','Mumbai','Bangalore','Hyderabad','Kolkata',]
-tier2 = ['Jaipur', 'Chennai', 'Indore', 'Kota', 
-'Chandigarh', 'Pune',  'Lucknow', 'Gaya',
-'Jalandhar', 'Mysore']
+from config.city import tier1, tier2
 
 class UserInput(BaseModel):
     age: typing.Annotated[int, Field(..., gt=0, description="The age of the user", examples=[30, 40])]
