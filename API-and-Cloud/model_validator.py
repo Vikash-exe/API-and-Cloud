@@ -1,7 +1,6 @@
-from fastapi import FastAPI, Path, HTTPException, Query
-import json
-from typing import Dict, List, Optional, Annotated
-from pydantic import BaseModel, EmailStr, Field, field_validator, ValidationError,  AnyUrl, model_validator, computed_field
+from fastapi import FastAPI, Path, Query
+from typing import Dict, List, Optional
+from pydantic import BaseModel, EmailStr, Field, field_validator,  AnyUrl, model_validator, computed_field
 
 class Patient(BaseModel):  #The Patient class is a Pydantic model that defines the structure and validation rules for patient data. It includes fields for name, email, website, age, weight, height, allergies, and contact information. The model also includes validators to ensure that the email is from a valid domain and that minors have an emergency contact. Additionally, it has a computed field for BMI based on weight and height.
 
