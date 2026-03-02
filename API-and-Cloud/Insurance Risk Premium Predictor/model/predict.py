@@ -1,10 +1,12 @@
+import os
 import pickle
-import numpy as np
 import pandas as pd
 
+# Load the trained model from the pickle file
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+model_path = os.path.join(BASE_DIR, "model.pkl")
 
-#impoting the model
-with open(r"F:\Python\FastAPI01\API-and-Cloud\Insurance Risk Premium Predictor\model.pkl", "rb") as file:
+with open(model_path, "rb") as file:
     model = pickle.load(file)
 
 model_version = "1.0.0"
