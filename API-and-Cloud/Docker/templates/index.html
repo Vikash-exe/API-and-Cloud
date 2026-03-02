@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ulam Spiral</title>
+</head>
+<body>
+
+<h2>Ulam Spiral Generator</h2>
+
+<form method="GET" action="/">
+    Enter size:
+    <input type="number" name="n" value="{{ n }}" min="10" max="800">
+    <button type="submit">Generate</button>
+</form>
+
+<br>
+
+<img src="/ulam?n={{ n }}" alt="Ulam Spiral">
+
+</body>
+</html>
